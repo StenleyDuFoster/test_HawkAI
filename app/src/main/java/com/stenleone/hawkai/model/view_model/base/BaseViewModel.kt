@@ -8,9 +8,7 @@ import org.koin.standalone.inject
 
 abstract class BaseViewModel : ViewModel(), KoinComponent {
 
-    protected val liveError = MutableLiveData<String>()
-
-    protected val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI by inject()
+    val liveError = MutableLiveData<String>()
 
     fun getError() = liveError
 }

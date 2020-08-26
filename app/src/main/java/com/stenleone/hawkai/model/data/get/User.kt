@@ -1,4 +1,4 @@
-package com.stenleone.hawkai.model.data
+package com.stenleone.hawkai.model.data.get
 
 import com.google.gson.annotations.SerializedName
 
@@ -20,7 +20,7 @@ data class User(
     val lastName: String,
     @SerializedName("native_first_name")
     val nativeFirstName: String,
-    @SerializedName("last_name")
+    @SerializedName("native_last_name")
     val nativeLastName: String,
     val phone: String,
     val points: Int
