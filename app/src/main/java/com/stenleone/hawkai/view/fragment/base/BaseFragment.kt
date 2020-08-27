@@ -6,11 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.stenleone.hawkai.R
+import com.stenleone.hawkai.view.activity.base.BaseActivity
 
 abstract class BaseFragment(val layId: Int) : Fragment() {
 
     abstract fun initAfterViewCreated()
     open fun initViewModelCallBack() { }
+
+    open protected fun animLoader(isAnimate: Boolean) {
+
+        activity.let {
+            (it as BaseActivity).apply {
+                if(isAnimate) {
+                    this.loadLayAnim.loadAnim()
+                } else {
+                    this.loadLayAnim.fadeOut()
+                }
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -1,4 +1,4 @@
-package com.stenleone.hawkai.util.easyToast
+package com.stenleone.hawkai.util.easyInfo
 
 import android.widget.Toast
 import com.stenleone.hawkai.di.application.App

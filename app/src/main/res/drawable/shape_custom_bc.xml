@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <stroke
-        android:color="@color/colorPrimaryDark"
+        android:color="@color/colorPrimaryLight"
         android:width="2dp"/>
 
     <corners
-        android:radius="20dp"/>
+        android:radius="10dp"/>
 
     <gradient
-        android:endColor="@color/colorPrimaryDark"
-        android:centerColor="@color/colorPrimaryDark"
-        android:startColor="@color/colorPrimaryDark"/>
+        android:endColor="@color/colorPrimaryLight"
+        android:centerColor="@color/colorPrimaryLight"
+        android:startColor="@color/colorPrimaryLight"/>
 
 </shape>
