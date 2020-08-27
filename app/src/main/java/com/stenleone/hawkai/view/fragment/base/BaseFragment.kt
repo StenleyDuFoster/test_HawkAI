@@ -7,8 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.stenleone.hawkai.R
 import com.stenleone.hawkai.view.activity.base.BaseActivity
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.Disposables
 
 abstract class BaseFragment(val layId: Int) : Fragment() {
+
+    lateinit var disposable : CompositeDisposable
 
     abstract fun initAfterViewCreated()
     open fun initViewModelCallBack() { }
@@ -34,8 +39,14 @@ abstract class BaseFragment(val layId: Int) : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        disposable = CompositeDisposable()
         initAfterViewCreated()
         initViewModelCallBack()
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        disposable.dispose()
+        super.onDestroyView()
     }
 }

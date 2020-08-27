@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.stenleone.hawkai.BuildConfig
 
 import com.stenleone.hawkai.model.data.get.login.LoginHawkAIResponseEntity
+import com.stenleone.hawkai.model.data.get.post_news.PostResponseEntity
 import com.stenleone.hawkai.model.data.post.PostAuth
 import com.stenleone.hawkai.model.network.JsonPlaceHolderHawkAI
 import com.stenleone.hawkai.model.view_model.base.BaseViewModel
@@ -13,26 +14,19 @@ import com.stenleone.hawkai.util.shared_preferences.SharedPreferencesManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class LoginViewModel(val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI) : BaseViewModel() {
+class PostNewsViewModel(val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI) : BaseViewModel() {
 
-    val liveData = MutableLiveData<LoginHawkAIResponseEntity>()
+    val livePost = MutableLiveData<PostResponseEntity>()
 
-    fun loginHawkAI(password: String) {
+    fun getPostsNews() {
 
-        jsonPlaceHolderFitPlan.postLogin(
-            PostAuth(
-                ApiConstant.PHONE,
-                password,
-                BuildConfig.VERSION_CODE
-            )
-        )
+        jsonPlaceHolderFitPlan.getPosts()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
                     if (it.isSuccessful) {
-                        liveData.postValue(it.body())
-                        SharedPreferencesManager.setToken(it.body()?.token)
+                        livePost.postValue(it.body())
                     } else {
                         liveError.postValue(ApiConstant.ERROR_TEXT + it.code())
                     }

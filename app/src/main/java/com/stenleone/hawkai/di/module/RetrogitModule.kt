@@ -17,9 +17,12 @@ val retrofitModule = module {
 
 fun getPlaceHolderHawkAI(): JsonPlaceHolderHawkAI {
     var interceptor =  HeaderTokenInterceptor()
+    var debugInterceptor = HttpLoggingInterceptor()
+    debugInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
     val client = OkHttpClient.Builder()
         .addInterceptor(interceptor)
+        .addInterceptor(debugInterceptor)
         .build()
 
     val retrofit = Retrofit.Builder()

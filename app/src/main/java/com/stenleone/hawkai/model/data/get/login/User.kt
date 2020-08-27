@@ -1,4 +1,4 @@
-package com.stenleone.hawkai.model.data.get
+package com.stenleone.hawkai.model.data.get.login
 
 import com.google.gson.annotations.SerializedName
 

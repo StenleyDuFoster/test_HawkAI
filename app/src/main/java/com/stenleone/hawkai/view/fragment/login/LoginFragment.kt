@@ -6,6 +6,8 @@ import com.stenleone.hawkai.R
 import com.stenleone.hawkai.model.view_model.LoginViewModel
 import com.stenleone.hawkai.view.activity.LoginActivity
 import com.stenleone.hawkai.view.fragment.base.BaseFragment
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -20,16 +22,18 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), KoinComponent {
 
     private fun initButton() {
 
-        buttonSignIn.clicks()
-            .throttleFirst(1, TimeUnit.SECONDS)
-            .subscribe {
-                animLoader(true)
-                viewModel.loginHawkAI(codeEditText.text.toString())
-            }
+        disposable.add(
+            buttonSignIn.clicks()
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe {
+                    animLoader(true)
+                    viewModel.loginHawkAI(codeEditText.text.toString())
+                }
+        )
     }
 
     private fun stuDaInitPass() { //debug code !!DELETE!!
-            codeEditText.setText("222222")
+        codeEditText.setText("222222")
     }
 
     override fun animLoader(isAnimate: Boolean) {
@@ -54,8 +58,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), KoinComponent {
             })
 
             liveError.observe(viewLifecycleOwner, {
-                titleText.setText(getString(R.string.error_msg))
-                subtitleText.setText("")
+                titleText.text = getString(R.string.error_msg)
+                subtitleText.text = ""
                 animLoader(false)
             })
         }

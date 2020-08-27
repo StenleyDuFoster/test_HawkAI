@@ -5,6 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="font_main">sans-serif-medium</string>
+
     <string name="error_msg">Oops, something is wrong</string>
     <string name="register_text">Don`t have an invitation? Request to join.</string>
     <string name="button_log_text">Join the discussion</string>
@@ -12,6 +13,7 @@
     <string name="subtitle_text">Consult with verified PROs and use your experience and knowledge to help others</string>
     <string name="image_login">image login</string>
     <string name="title_text">You`re not alone!</string>
-
+    <string name="user_pro">PRO</string>
+    <string name="join_button_text">Join the discussion</string>
 
 </resources>
