@@ -7,13 +7,13 @@ import com.stenleone.hawkai.util.fragmentManager.CustomFragmentManger
 
 abstract class BaseActivity(val layId: Int) : AppCompatActivity() {
 
-   protected val fragmentManager = CustomFragmentManger(this)
+    protected val fragmentManager = CustomFragmentManger(this)
+
+    abstract fun initAfterCreate()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layId)
         initAfterCreate()
     }
-
-    abstract fun initAfterCreate()
 }

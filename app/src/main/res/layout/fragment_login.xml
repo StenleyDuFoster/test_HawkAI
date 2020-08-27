@@ -1,47 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.LoginFragment">
+    android:background="@color/colorLogo"
+    android:orientation="vertical"
+    tools:context=".view.fragment.login.LoginFragment">
 
     <ImageView
-        android:background="@drawable/abc_vector_test"
         android:id="@+id/mainImage"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"/>
-    
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:src="@drawable/log_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/writeCodeImage"
+        android:id="@+id/titleText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:fontFamily="font_main"
+        android:gravity="center"
+        android:text="You`re not alone!"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainImage"
+        app:layout_constraintVertical_bias="0.054"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/subtitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:fontFamily="font_main"
+        android:gravity="center"
+        android:text="Consult with verified PROs and use your experience and knowledge to help others"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleText"
+        app:layout_constraintVertical_bias="0.054"
+        tools:layout_editor_absoluteX="16dp" />
+
+
+    <TextView
+        android:id="@+id/codeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="font_main"
+        android:gravity="center"
+        android:text="Got an invitation code? Enter it now"
+        android:textColor="@color/colorAccent"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subtitleText"
+        app:layout_constraintVertical_bias="0.186"
+        tools:layout_editor_absoluteX="16dp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:textColorHint="#858585"
-        android:layout_margin="5dp"
-        android:layout_gravity="center"
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:hintTextColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/codeText"
+        app:layout_constraintVertical_bias="0.245">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/codeEditText"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="60dp"
-            android:hint="Code"
+            android:background="@color/colorLogo"
+            android:fontFamily="font_main"
+            android:gravity="center"
             android:inputType="number"
-            android:textColorHint="#858585"/>
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/buttonSignIn"
-        android:text="sign in"
-        android:layout_margin="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_width="100dp"
-        android:layout_height="40dp"/>
+        android:layout_margin="5dp"
+        android:background="@drawable/shape_custom_bc"
+        android:fontFamily="font_main"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="Join the discussion"
+        android:textColor="@color/colorLogo"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintVertical_bias="0.366" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/registerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:fontFamily="font_main"
+        android:gravity="center"
+        android:text="Don`t have an invitation? Request to join."
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

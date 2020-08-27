@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@android:drawable/btn_star"
+        android:title="home" />
+
+    <item
+        android:id="@+id/navigation_photo"
+        android:icon="@android:drawable/btn_star"
+        android:title="photo" />
+
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@android:drawable/btn_star"
+        android:title="search" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@android:drawable/btn_star"
+        android:title="settings" />
+
+</menu>

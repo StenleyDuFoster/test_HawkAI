@@ -1,10 +1,11 @@
-package com.stenleone.hawkai.view.fragment
+package com.stenleone.hawkai.view.fragment.login
 
 import com.jakewharton.rxbinding3.view.clicks
 
 import com.stenleone.hawkai.R
 import com.stenleone.hawkai.model.view_model.LoginViewModel
 import com.stenleone.hawkai.util.easyToast.makeToast
+import com.stenleone.hawkai.view.activity.LoginActivity
 import com.stenleone.hawkai.view.fragment.base.BaseFragment
 
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -27,15 +28,22 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), KoinComponent {
             }
     }
 
-    override fun initAfterViewCreated() {
-        initButton()
+    private fun stuDaInitPass() { //debug code !!DELETE!!
+            codeEditText.setText("222222")
     }
 
-    override fun viewModelCallBack() {
+    override fun initAfterViewCreated() {
+        initButton()
+        stuDaInitPass()
+    }
+
+    override fun initViewModelCallBack() {
 
         viewModel.apply {
             liveData.observe(viewLifecycleOwner, {
-                makeToast(it.toString())
+                activity.let {
+                    (it as LoginActivity).loadMainActivity()
+                }
             })
 
             liveError.observe(viewLifecycleOwner, {

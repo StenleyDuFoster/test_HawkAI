@@ -7,21 +7,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.stenleone.hawkai.R
 
-abstract class BaseFragment(layId: Int) : Fragment() {
+abstract class BaseFragment(val layId: Int) : Fragment() {
 
     abstract fun initAfterViewCreated()
-    open fun viewModelCallBack() { }
+    open fun initViewModelCallBack() { }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        return inflater.inflate(layId, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initAfterViewCreated()
-        viewModelCallBack()
+        initViewModelCallBack()
         super.onViewCreated(view, savedInstanceState)
     }
 }
