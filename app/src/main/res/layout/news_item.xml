@@ -1,97 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    cardCornerRadius="10dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:adjustViewBounds="true">
 
-    <LinearLayout
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="result"
+            type="com.stenleone.hawkai.model.data.get.post_news.Result" />
+
+        <variable
+            name="userIcoUrl"
+            type="String" />
+
+        <variable
+            name="userImageUrl"
+            type="String" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+        <com.google.android.material.card.MaterialCardView
 
-            <ImageView
-                android:id="@+id/userIco"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="10dp" />
-
-            <TextView
-                android:id="@+id/userName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@string/font_main"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/userProStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/shape_custom_bc"
-                android:fontFamily="@string/font_main"
-                android:padding="5dp"
-                android:text="@string/user_pro"
-                android:visibility="gone" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/userText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:fontFamily="@string/font_main" />
-
-        <ImageView
-            android:id="@+id/userImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:elevation="3dp"
+            card_view:cardCornerRadius="1dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/userLocate"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:fontFamily="@string/font_main"
-                android:gravity="start" />
+                android:layout_margin="10dp">
 
-            <TextView
-                android:id="@+id/userComments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:fontFamily="@string/font_main"
-                android:gravity="end" />
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/firstBlock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/joinDiscussion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:fontFamily="@string/font_main"
-            android:gravity="end"
-            android:text="@string/join_button_text"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold" />
+                    <ImageView
+                        android:id="@+id/userIco"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="10dp"
+                        app:loadCircleImage="@{userIcoUrl}" />
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/userName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@string/font_main"
+                        android:text="@{result.author.first_name + result.author.last_name}"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/userProStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/shape_custom_bc"
+                        android:fontFamily="@string/font_main"
+                        android:padding="5dp"
+                        android:text="@string/user_pro"
+                        android:textColor="@color/colorLogo"
+                        android:visibility="@{result.author._pro ? View.VISIBLE : View.GONE}" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/userText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/firstBlock"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@string/font_main"
+                    android:text="@{result.text}"
+                    android:textColor="@color/colorAccent" />
+
+                <ImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/userText"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:loadImage="@{userImageUrl}"/>
+
+                <LinearLayout
+                    android:id="@+id/layData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/userImage"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/userLocate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@string/font_main"
+                        android:gravity="start"
+                        android:text="@{result.location_name}" />
+
+                    <TextView
+                        android:id="@+id/userComments"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@string/font_main"
+                        android:gravity="end"
+                        app:getComment="@{result.comments_count}" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/joinDiscussion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layData"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="end"
+                    android:layout_margin="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@string/font_main"
+                    android:gravity="end"
+                    android:text="@string/join_button_text"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+</layout>

@@ -1,17 +1,23 @@
 package com.stenleone.hawkai.view.fragment.main
 
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.stenleone.hawkai.R
+import com.stenleone.hawkai.model.data.get.post_news.Result
 import com.stenleone.hawkai.model.view_model.PostNewsViewModel
 import com.stenleone.hawkai.util.constant.ApiConstant
 import com.stenleone.hawkai.util.easyInfo.makeToast
 import com.stenleone.hawkai.view.fragment.base.BaseFragment
+import com.stenleone.hawkai.view.recycler.ListNewsRecycler
+import com.stenleone.hawkai.view.recycler.callback.CallBackFromListNews
 import kotlinx.android.synthetic.main.fragment_news_feed.*
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
-class NewsFeedFragment : BaseFragment(R.layout.fragment_news_feed), KoinComponent {
+class NewsFeedFragment : BaseFragment(R.layout.fragment_news_feed), CallBackFromListNews,
+    KoinComponent {
 
     private val viewModel: PostNewsViewModel by inject()
+    private val adapterListNews: ListNewsRecycler by inject()
 
     fun initSwipeToRefresh() {
         swipeToRefreshLay.setOnRefreshListener {
@@ -19,20 +25,33 @@ class NewsFeedFragment : BaseFragment(R.layout.fragment_news_feed), KoinComponen
         }
     }
 
+    fun initRecycler() {
+        recycler.layoutManager = LinearLayoutManager(context)
+        adapterListNews.listener = this
+        recycler.adapter = adapterListNews
+    }
+
     fun getContent() {
         viewModel.getPostsNews()
         animLoader(true)
     }
 
-    fun onContentLoaded() {
+    fun onContentLoaded(result: List<Result>?) {
         animLoader(false)
         swipeToRefreshLay.isRefreshing = false
+        if (result != null) {
+            (recycler.adapter as ListNewsRecycler).apply {
+                arrayView = ArrayList(result)
+                notifyDataSetChanged()
+            }
+        }
     }
 
     override fun initAfterViewCreated() {
 
-        getContent()
+        initRecycler()
         initSwipeToRefresh()
+        getContent()
     }
 
     override fun initViewModelCallBack() {
@@ -40,14 +59,25 @@ class NewsFeedFragment : BaseFragment(R.layout.fragment_news_feed), KoinComponen
         viewModel.apply {
 
             livePost.observe(viewLifecycleOwner, {
-                makeToast(it.results.size.toString())
-                onContentLoaded()
+                onContentLoaded(it.results)
             })
 
             liveError.observe(viewLifecycleOwner, {
                 makeToast(ApiConstant.ERROR_TEXT + it)
-                onContentLoaded()
+                onContentLoaded(null)
             })
         }
+    }
+
+    override fun userClick() {
+        makeToast("1")
+    }
+
+    override fun joinClick() {
+        makeToast("2")
+    }
+
+    override fun imageClick() {
+        makeToast("3")
     }
 }

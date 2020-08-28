@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -22,6 +23,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             debuggable false
         }
+    }
+
+    dataBinding {
+        enabled true
     }
 }
 
@@ -55,6 +60,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 
     implementation "com.github.bumptech.glide:glide:4.11.0"//---------------------------------------glide
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
     implementation "org.koin:koin-android:1.0.2"//--------------------------------------------------Koin
     implementation "org.koin:koin-androidx-viewmodel:1.0.2"
