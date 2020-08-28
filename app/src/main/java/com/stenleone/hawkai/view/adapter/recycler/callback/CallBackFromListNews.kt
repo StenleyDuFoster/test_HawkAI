@@ -1,4 +1,4 @@
-package com.stenleone.hawkai.view.recycler.callback
+package com.stenleone.hawkai.view.adapter.recycler.callback
 
 interface CallBackFromListNews {
 

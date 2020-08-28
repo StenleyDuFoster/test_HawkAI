@@ -13,16 +13,16 @@ import io.reactivex.disposables.Disposables
 
 abstract class BaseFragment(val layId: Int) : Fragment() {
 
-    lateinit var disposable : CompositeDisposable
+    lateinit var disposable: CompositeDisposable
 
     abstract fun initAfterViewCreated()
-    open fun initViewModelCallBack() { }
+    open fun initViewModelCallBack() {}
 
     open protected fun animLoader(isAnimate: Boolean) {
 
         activity.let {
             (it as BaseActivity).apply {
-                if(isAnimate) {
+                if (isAnimate) {
                     this.loadLayAnim.loadAnim()
                 } else {
                     this.loadLayAnim.fadeOut()

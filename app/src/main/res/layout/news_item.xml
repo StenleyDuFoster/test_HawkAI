@@ -86,20 +86,26 @@
                     android:text="@{result.text}"
                     android:textColor="@color/colorAccent" />
 
-                <ImageView
-                    android:id="@+id/userImage"
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/pager"
                     android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_below="@+id/userText" />
+
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/userText"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    app:loadImage="@{userImageUrl}"/>
+                    android:layout_above="@+id/layData"
+                    android:layout_centerHorizontal="true"
+                    android:padding="10dp"
+                    app:ci_drawable="@color/colorPrimary" />
 
                 <LinearLayout
                     android:id="@+id/layData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/userImage"
+                    android:layout_below="@+id/pager"
                     android:orientation="horizontal">
 
                     <TextView
