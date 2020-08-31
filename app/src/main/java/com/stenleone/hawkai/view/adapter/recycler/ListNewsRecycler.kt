@@ -34,14 +34,14 @@ class ListNewsRecycler :
                         joinDiscussion.clicks()
                             .throttleFirst(1, TimeUnit.SECONDS)
                             .subscribe {
-                                listener?.userClick()
+                                listener?.joinClick()
                             })
 
                     compositeDisposable.add(
                         userIco.clicks()
                             .throttleFirst(1, TimeUnit.SECONDS)
                             .subscribe {
-                                listener?.joinClick()
+                                listener?.userClick()
                             })
                 }
             }

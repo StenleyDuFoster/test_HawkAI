@@ -37,7 +37,7 @@ class SlideImageAdapter : RecyclerView.Adapter<SlideImageAdapter.PagerVH>() {
 
     private fun buildImageViewer(context: Context, position: Int, startImage: ImageView) {
 
-        val hudImageLay = HudImageLay(context, listImage.size)
+        val hudImageLay = HudImageLay(context, position, listImage.size)
 
         StfalconImageViewer.Builder(
             context,

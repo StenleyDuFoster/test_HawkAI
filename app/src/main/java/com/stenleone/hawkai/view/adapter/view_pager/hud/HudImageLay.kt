@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.item_page_hud.view.*
 
 class HudImageLay @JvmOverloads constructor(
     context: Context,
+    startPosition: Int = 0,
     val totalPage: Int = 1,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -18,7 +19,7 @@ class HudImageLay @JvmOverloads constructor(
     init {
         View.inflate(context, R.layout.item_page_hud, this)
         setBackgroundColor(Color.TRANSPARENT)
-        update(0)
+        update(startPosition)
     }
 
     fun update(page: Int) {

@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.load_lay.*
 
 abstract class BaseActivity(val layId: Int) : AppCompatActivity() {
 
-    protected val fragmentManager = CustomFragmentManger(this)
+    val fragmentManager = CustomFragmentManger(this)
     lateinit var loadLayAnim: LoadLeyAnimator
 
     open fun initAfterCreate() {
