@@ -9,53 +9,61 @@ import com.stenleone.hawkai.databinding.NewsItemBinding
 import com.stenleone.hawkai.model.data.get.post_news.Result
 import com.stenleone.hawkai.view.adapter.recycler.callback.CallBackFromListNews
 import com.stenleone.hawkai.view.adapter.view_pager.SlideImageAdapter
+import io.reactivex.disposables.CompositeDisposable
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 import java.util.concurrent.TimeUnit
 
-class ListNewsRecycler() :
+class ListNewsRecycler :
     RecyclerView.Adapter<ListNewsRecycler.ViewHolder>(), KoinComponent {
 
     var arrayView: ArrayList<Result> = ArrayList()
     var listener: CallBackFromListNews? = null
 
+    private val compositeDisposable = CompositeDisposable()
+
     inner class ViewHolder(private val binding: NewsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.apply {
+                pager.setPageTransformer(CustomPageTransformer())
+
+                if (listener != null) {
+                    compositeDisposable.add(
+                        joinDiscussion.clicks()
+                            .throttleFirst(1, TimeUnit.SECONDS)
+                            .subscribe {
+                                listener?.userClick()
+                            })
+
+                    compositeDisposable.add(
+                        userIco.clicks()
+                            .throttleFirst(1, TimeUnit.SECONDS)
+                            .subscribe {
+                                listener?.joinClick()
+                            })
+                }
+            }
+        }
 
         fun bind(item: Result) {
             binding.apply {
                 result = item
                 userIcoUrl = item.author.image
 
-                if (listener != null) {
-                    joinDiscussion.clicks()
-                        .throttleFirst(1, TimeUnit.SECONDS)
-                        .subscribe {
-                            listener?.userClick()
-                        }
 
-                    userIco.clicks()
-                        .throttleFirst(1, TimeUnit.SECONDS)
-                        .subscribe {
-                            listener?.userClick()
-                        }
+                val slideAdapter: SlideImageAdapter by inject()
 
-                    pager.clicks()
-                        .throttleFirst(1, TimeUnit.SECONDS)
-                        .subscribe {
-                            listener?.imageClick()
-                        }
-                    val slideAdapter: SlideImageAdapter by inject()
-                    pager.setPageTransformer(CustomPageTransformer())
-                    if(binding.result?.images != null) {
-                        slideAdapter.images_url = binding.result?.images!!
-                    }
-
-                    pager.adapter = slideAdapter
-                    indicator.setViewPager(pager)
+                if (binding.result?.images != null) {
+                    slideAdapter.listImage = binding.result?.images!!
                 }
+
+                pager.adapter = slideAdapter
+                indicator.setViewPager(pager)
             }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -73,5 +81,10 @@ class ListNewsRecycler() :
 
     override fun getItemCount(): Int {
         return arrayView.size
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        compositeDisposable.dispose()
     }
 }

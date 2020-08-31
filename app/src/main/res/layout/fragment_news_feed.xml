@@ -18,9 +18,4 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <ImageView
-        android:id="@+id/im_test"
-        android:layout_width="50dp"
-        android:layout_height="50dp"/>
-
 </FrameLayout>

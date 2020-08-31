@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:fontFamily="@string/font_main"
-                        android:text="@{result.author.first_name + result.author.last_name}"
+                        android:text="@{result.author.first_name + ' ' + result.author.last_name}"
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold" />
 

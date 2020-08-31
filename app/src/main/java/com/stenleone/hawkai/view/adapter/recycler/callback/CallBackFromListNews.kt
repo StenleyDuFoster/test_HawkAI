@@ -4,5 +4,4 @@ interface CallBackFromListNews {
 
     fun userClick()
     fun joinClick()
-    fun imageClick()
 }
