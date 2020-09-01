@@ -34,14 +34,14 @@ class ListNewsRecycler :
                         joinDiscussion.clicks()
                             .throttleFirst(1, TimeUnit.SECONDS)
                             .subscribe {
-                                listener?.joinClick()
+                                listener?.joinClick(arrayView[adapterPosition].id)
                             })
 
                     compositeDisposable.add(
                         userIco.clicks()
                             .throttleFirst(1, TimeUnit.SECONDS)
                             .subscribe {
-                                listener?.userClick()
+                                listener?.userClick(arrayView[adapterPosition].id)
                             })
                 }
             }
@@ -51,7 +51,6 @@ class ListNewsRecycler :
             binding.apply {
                 result = item
                 userIcoUrl = item.author.image
-
 
                 val slideAdapter: SlideImageAdapter by inject()
 
@@ -63,7 +62,6 @@ class ListNewsRecycler :
                 indicator.setViewPager(pager)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

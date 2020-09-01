@@ -1,4 +1,5 @@
 package com.stenleone.hawkai.view.adapter.view_pager.util
+
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 

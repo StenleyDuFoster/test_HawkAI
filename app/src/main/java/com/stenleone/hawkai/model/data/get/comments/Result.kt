@@ -2,7 +2,7 @@ package com.stenleone.hawkai.model.data.get.comments
 
 data class Result(
     val author: Author,
-    val childs: List<Child>,
+    val childs: List<Result>,
     val comment: String,
     val create_date: String,
     val id: Int,
@@ -10,5 +10,6 @@ data class Result(
     val is_liked: Boolean,
     val level: Int,
     val likes: Int,
+    val parent: Any,
     val tags: List<Any>
 )

@@ -1,6 +1,6 @@
 package com.stenleone.hawkai.model.network
 
-import com.stenleone.hawkai.model.data.get.comments.CommentEntity
+import com.stenleone.hawkai.model.data.get.comments.CommentsEntity
 import com.stenleone.hawkai.model.data.get.login.LoginHawkAIResponseEntity
 import com.stenleone.hawkai.model.data.get.post_news.PostResponseEntity
 import com.stenleone.hawkai.model.data.post.PostAuth
@@ -23,5 +23,5 @@ interface JsonPlaceHolderHawkAI {
     @GET(ApiConstant.POST_URL + "{post_number}/" + ApiConstant.COMMENT_URL + ApiConstant.LIMIT)
     fun getComments(
         @Path("post_number") post_number: Int,
-    ): Single<Response<CommentEntity>>
+    ): Single<Response<CommentsEntity>>
 }

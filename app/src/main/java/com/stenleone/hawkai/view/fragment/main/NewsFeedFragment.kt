@@ -61,13 +61,14 @@ class NewsFeedFragment : BaseLoaderListContentFragment(R.layout.fragment_news_fe
         }
     }
 
-    override fun userClick() {
-        makeToast("1")
+    override fun userClick(adapterPosition: Int) {
+        makeToast(adapterPosition.toString())
     }
 
-    override fun joinClick() {
+    override fun joinClick(adapterPosition: Int) {
         activity.let {
             val commentsFragment = CommentsFragment()
+            commentsFragment.postId = adapterPosition
             (it as BaseActivity).fragmentManager.addWithBackStackFragmentToFragmentManager(
                 commentsFragment,
                 this

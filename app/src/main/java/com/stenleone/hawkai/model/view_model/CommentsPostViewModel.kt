@@ -1,7 +1,8 @@
 package com.stenleone.hawkai.model.view_model
 
 import androidx.lifecycle.MutableLiveData
-import com.stenleone.hawkai.model.data.get.comments.CommentEntity
+import com.stenleone.hawkai.model.data.get.comments.CommentsEntity
+import com.stenleone.hawkai.model.data.get.comments.Result
 
 import com.stenleone.hawkai.model.network.JsonPlaceHolderHawkAI
 import com.stenleone.hawkai.model.view_model.base.BaseViewModel
@@ -12,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 
 class CommentsPostViewModel(val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI) : BaseViewModel() {
 
-    val liveComment = MutableLiveData<CommentEntity>()
+    val liveComment = MutableLiveData<ArrayList<Result>>()
 
     fun getCommentsPost(postId: Int) {
 
@@ -22,7 +23,7 @@ class CommentsPostViewModel(val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI) :
             .subscribe(
                 {
                     if (it.isSuccessful) {
-                        liveComment.postValue(it.body())
+                        liveComment.postValue(addChildResultToResults(it.body()))
                     } else {
                         liveError.postValue(ApiConstant.ERROR_TEXT + it.code())
                     }
@@ -31,5 +32,19 @@ class CommentsPostViewModel(val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI) :
                     liveError.postValue(it.message)
                 }
             )
+    }
+
+    private fun addChildResultToResults(response: CommentsEntity?): ArrayList<Result> {
+        val array = ArrayList(response?.results)
+
+        var a = 0
+        while(array.size > a) {
+            if(!array[a].childs.isNullOrEmpty()) {
+                array.addAll(array[a].childs.reversed())
+            }
+            a += 1
+        }
+
+        return array
     }
 }

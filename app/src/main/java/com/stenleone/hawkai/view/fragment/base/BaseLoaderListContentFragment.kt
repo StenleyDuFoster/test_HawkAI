@@ -1,6 +1,7 @@
 package com.stenleone.hawkai.view.fragment.base
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_news_feed.*
 
 abstract class BaseLoaderListContentFragment(layId: Int) : BaseFragment(layId) {
