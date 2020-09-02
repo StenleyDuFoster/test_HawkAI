@@ -9,6 +9,4 @@ import org.koin.standalone.inject
 abstract class BaseViewModel : ViewModel(), KoinComponent {
 
     val liveError = MutableLiveData<String>()
-
-    fun getError() = liveError
 }

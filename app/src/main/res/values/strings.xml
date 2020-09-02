@@ -16,4 +16,7 @@
     <string name="user_pro">PRO</string>
     <string name="join_button_text">Join the discussion</string>
 
+    <string name="develop">in develop</string>
+    <string name="not_access_camera">no access to the camera</string>
+
 </resources>

@@ -1,26 +1,36 @@
 package com.stenleone.hawkai.util.fragmentManager
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.stenleone.hawkai.R
-import com.stenleone.hawkai.view.activity.base.BaseActivity
 
-class CustomFragmentManger(val activity: BaseActivity) {
+class CustomFragmentManger(val activity: AppCompatActivity) {
 
     lateinit var fragmentTransition: FragmentTransaction
+    val containerId = R.id.fragmentContainer
 
     fun addWithBackStackFragmentToFragmentManager(fragment: Fragment) {
 
-        initFragmentTransition()
-        fragmentTransition.add(R.id.fragmentContainer, fragment)
-        fragmentTransition.addToBackStack(null)
-        fragmentTransition.commit()
+        if (!fragment.isAdded) {
+            initFragmentTransition()
+            fragmentTransition.add(containerId, fragment)
+            fragmentTransition.addToBackStack(null)
+            fragmentTransition.commit()
+        }
     }
 
     fun addFragmentToFragmentManager(fragment: Fragment) {
 
         initFragmentTransition()
-        fragmentTransition.add(R.id.fragmentContainer, fragment)
+        fragmentTransition.add(containerId, fragment)
+        fragmentTransition.commit()
+    }
+
+    fun removeFragmentFromTransition(fragment: Fragment) {
+        initFragmentTransition()
+        fragmentTransition.remove(fragment)
         fragmentTransition.commit()
     }
 
@@ -31,6 +41,10 @@ class CustomFragmentManger(val activity: BaseActivity) {
             R.anim.in_leaft_to_right, R.anim.out_leaft_to_right,
             R.anim.in_leaft_to_right, R.anim.out_leaft_to_right
         )
+    }
+
+    fun clearBackStack() {
+        activity.supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
 }

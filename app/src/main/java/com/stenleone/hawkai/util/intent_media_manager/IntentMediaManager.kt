@@ -7,7 +7,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.stenleone.hawkai.di.application.App
-import com.stenleone.hawkai.util.constant.IntentConstatnt
+import com.stenleone.hawkai.util.constant.IntentConstant
 
 
 class IntentMediaManager(val fragment: Fragment) {
@@ -19,13 +19,13 @@ class IntentMediaManager(val fragment: Fragment) {
         intent.action = Intent.ACTION_GET_CONTENT
         fragment.startActivityForResult(
             Intent.createChooser(intent, "Select Picture"),
-            IntentConstatnt.GALERY
+            IntentConstant.GALLERY
         )
     }
 
     private fun createCameraIntent() {
         val intent = Intent("android.media.action.IMAGE_CAPTURE")
-        fragment.startActivityForResult(intent, IntentConstatnt.CAMERA)
+        fragment.startActivityForResult(intent, IntentConstant.CAMERA)
     }
 
     fun createCameraWithPermission() {
@@ -39,7 +39,7 @@ class IntentMediaManager(val fragment: Fragment) {
             fragment.activity.let {
                 ActivityCompat.requestPermissions(
                     it!!, arrayOf(Manifest.permission.CAMERA),
-                    IntentConstatnt.CAMERA
+                    IntentConstant.CAMERA
                 )
             }
         }

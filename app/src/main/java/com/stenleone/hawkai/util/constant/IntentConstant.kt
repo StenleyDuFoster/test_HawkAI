@@ -1,7 +1,7 @@
 package com.stenleone.hawkai.util.constant
 
-object IntentConstatnt {
+object IntentConstant {
 
     const val CAMERA = 1
-    const val GALERY = 2
+    const val GALLERY = 2
 }

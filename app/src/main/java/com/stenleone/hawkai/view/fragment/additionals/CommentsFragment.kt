@@ -10,7 +10,7 @@ import com.stenleone.hawkai.R
 import com.stenleone.hawkai.di.application.App
 import com.stenleone.hawkai.model.data.get.comments.Result
 import com.stenleone.hawkai.model.view_model.CommentsPostViewModel
-import com.stenleone.hawkai.util.constant.IntentConstatnt
+import com.stenleone.hawkai.util.constant.IntentConstant
 import com.stenleone.hawkai.util.easyInfo.makeToast
 import com.stenleone.hawkai.util.glide.GlideApp
 import com.stenleone.hawkai.util.intent_media_manager.IntentMediaManager
@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.nav_send_system.*
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 import java.util.concurrent.TimeUnit
-
 
 class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comments),
     CallBackFromListComments, KoinComponent {
@@ -166,11 +165,11 @@ class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comment
             chipGroup.addView(imageView)
 
             when (requestCode) {
-                IntentConstatnt.CAMERA -> {
+                IntentConstant.CAMERA -> {
                     val image = data!!.extras!!.get("data") as Bitmap
                     imageView.setImageBitmap(image)
                 }
-                IntentConstatnt.GALERY -> {
+                IntentConstant.GALLERY -> {
                     GlideApp
                         .with(App.appContext)
                         .load(data.data)

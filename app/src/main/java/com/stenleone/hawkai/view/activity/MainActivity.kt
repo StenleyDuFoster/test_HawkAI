@@ -4,12 +4,14 @@ import android.content.pm.PackageManager
 import android.view.View
 import com.jakewharton.rxbinding3.view.clicks
 import com.stenleone.hawkai.R
-import com.stenleone.hawkai.util.constant.IntentConstatnt
-import com.stenleone.hawkai.util.easyInfo.l
+import com.stenleone.hawkai.util.constant.IntentConstant
 import com.stenleone.hawkai.util.easyInfo.makeToast
 import com.stenleone.hawkai.view.activity.base.BaseActivity
 import com.stenleone.hawkai.view.fragment.additionals.CommentsFragment
+import com.stenleone.hawkai.view.fragment.base.BaseFragment
 import com.stenleone.hawkai.view.fragment.main.NewsFeedFragment
+import com.stenleone.hawkai.view.fragment.main.SearchFragment
+import com.stenleone.hawkai.view.fragment.main.SettingsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import java.util.concurrent.TimeUnit
@@ -17,7 +19,9 @@ import java.util.concurrent.TimeUnit
 class MainActivity : BaseActivity(R.layout.activity_main) {
 
     var homeFragment = NewsFeedFragment()
-    lateinit var commentsFragment: CommentsFragment
+    var commentsFragment: CommentsFragment? = null
+    val searchFragment = SearchFragment()
+    val settingsFragment = SettingsFragment()
 
     fun showBackButton() {
         backClick.visibility = View.VISIBLE
@@ -41,16 +45,18 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         navigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
-
+                    fragmentManager.clearBackStack()
                 }
                 R.id.navigation_photo -> {
-
+                    makeToast(getString(R.string.develop))
                 }
                 R.id.navigation_search -> {
 
+                    fragmentManager.addWithBackStackFragmentToFragmentManager(searchFragment)
                 }
                 R.id.navigation_settings -> {
 
+                    fragmentManager.addWithBackStackFragmentToFragmentManager(settingsFragment)
                 }
             }
             return@setOnNavigationItemSelectedListener true
@@ -76,15 +82,15 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         grantResults: IntArray
     ) {
         when (requestCode) {
-            IntentConstatnt.CAMERA -> {
+            IntentConstant.CAMERA -> {
                 if (grantResults.size > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ) {
                     commentsFragment.let {
-                        it.intentMediaManager.createCameraWithPermission()
+                        it?.intentMediaManager?.createCameraWithPermission()
                     }
                 } else {
-                    makeToast("no access to the camera")
+                    makeToast(getString(R.string.not_access_camera))
                 }
                 return
             }

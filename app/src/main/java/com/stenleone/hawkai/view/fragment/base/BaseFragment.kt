@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import androidx.fragment.app.Fragment
+
 import com.stenleone.hawkai.view.activity.base.BaseActivity
+
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseFragment(val layId: Int) : Fragment() {

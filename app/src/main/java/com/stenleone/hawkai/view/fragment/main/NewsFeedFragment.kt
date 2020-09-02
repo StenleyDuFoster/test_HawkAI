@@ -17,7 +17,8 @@ import kotlinx.android.synthetic.main.fragment_news_feed.*
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
-class NewsFeedFragment : BaseLoaderListContentFragment(R.layout.fragment_news_feed), CallBackFromListNews,
+class NewsFeedFragment : BaseLoaderListContentFragment(R.layout.fragment_news_feed),
+    CallBackFromListNews,
     KoinComponent {
 
     private val viewModel: PostNewsViewModel by inject()
@@ -69,9 +70,9 @@ class NewsFeedFragment : BaseLoaderListContentFragment(R.layout.fragment_news_fe
     override fun joinClick(adapterPosition: Int) {
         (activity as MainActivity).let {
             it.commentsFragment = CommentsFragment()
-            it.commentsFragment.postId = adapterPosition
+            it.commentsFragment?.postId = adapterPosition
             it.fragmentManager.addWithBackStackFragmentToFragmentManager(
-                it.commentsFragment
+                it.commentsFragment!!
             )
         }
     }
