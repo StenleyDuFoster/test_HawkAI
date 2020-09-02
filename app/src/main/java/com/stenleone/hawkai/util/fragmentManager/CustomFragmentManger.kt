@@ -9,12 +9,11 @@ class CustomFragmentManger(val activity: BaseActivity) {
 
     lateinit var fragmentTransition: FragmentTransaction
 
-    fun addWithBackStackFragmentToFragmentManager(fragment: Fragment, hideFragment: Fragment) {
+    fun addWithBackStackFragmentToFragmentManager(fragment: Fragment) {
 
         initFragmentTransition()
         fragmentTransition.add(R.id.fragmentContainer, fragment)
         fragmentTransition.addToBackStack(null)
-        fragmentTransition.hide(hideFragment)
         fragmentTransition.commit()
     }
 

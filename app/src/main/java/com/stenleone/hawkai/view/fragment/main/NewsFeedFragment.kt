@@ -5,6 +5,7 @@ import com.stenleone.hawkai.model.data.get.post_news.Result
 import com.stenleone.hawkai.model.view_model.PostNewsViewModel
 import com.stenleone.hawkai.util.constant.ApiConstant
 import com.stenleone.hawkai.util.easyInfo.makeToast
+import com.stenleone.hawkai.view.activity.MainActivity
 import com.stenleone.hawkai.view.activity.base.BaseActivity
 import com.stenleone.hawkai.view.adapter.recycler.ListNewsRecycler
 import com.stenleone.hawkai.view.adapter.recycler.callback.CallBackFromListNews
@@ -66,12 +67,11 @@ class NewsFeedFragment : BaseLoaderListContentFragment(R.layout.fragment_news_fe
     }
 
     override fun joinClick(adapterPosition: Int) {
-        activity.let {
-            val commentsFragment = CommentsFragment()
-            commentsFragment.postId = adapterPosition
-            (it as BaseActivity).fragmentManager.addWithBackStackFragmentToFragmentManager(
-                commentsFragment,
-                this
+        (activity as MainActivity).let {
+            it.commentsFragment = CommentsFragment()
+            it.commentsFragment.postId = adapterPosition
+            it.fragmentManager.addWithBackStackFragmentToFragmentManager(
+                it.commentsFragment
             )
         }
     }

@@ -1,26 +1,101 @@
 package com.stenleone.hawkai.view.fragment.additionals
 
+import android.content.Intent
+import android.graphics.Bitmap
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.view.updateMargins
+import com.jakewharton.rxbinding3.view.clicks
 import com.stenleone.hawkai.R
-import com.stenleone.hawkai.model.view_model.CommentsPostViewModel
-import com.stenleone.hawkai.util.easyInfo.makeToast
-import com.stenleone.hawkai.view.activity.MainActivity
+import com.stenleone.hawkai.di.application.App
 import com.stenleone.hawkai.model.data.get.comments.Result
-import com.stenleone.hawkai.view.adapter.recycler.list_comments.ListCommentsRecycler
+import com.stenleone.hawkai.model.view_model.CommentsPostViewModel
+import com.stenleone.hawkai.util.constant.IntentConstatnt
+import com.stenleone.hawkai.util.easyInfo.makeToast
+import com.stenleone.hawkai.util.glide.GlideApp
+import com.stenleone.hawkai.util.intent_media_manager.IntentMediaManager
+import com.stenleone.hawkai.view.activity.MainActivity
 import com.stenleone.hawkai.view.adapter.recycler.callback.CallBackFromListComments
+import com.stenleone.hawkai.view.adapter.recycler.list_comments.ListCommentsRecycler
 import com.stenleone.hawkai.view.fragment.base.BaseLoaderListContentFragment
-
 import kotlinx.android.synthetic.main.fragment_news_feed.*
-
+import kotlinx.android.synthetic.main.nav_send_system.*
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
+import java.util.concurrent.TimeUnit
 
-class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comments), CallBackFromListComments, KoinComponent {
+
+class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comments),
+    CallBackFromListComments, KoinComponent {
 
     private val viewModel: CommentsPostViewModel by inject()
     private val adapterListCommentsRecycler: ListCommentsRecycler by inject()
+    val intentMediaManager = IntentMediaManager(this)
     var postId = 0
 
     private var commentsResult: List<Result>? = null
+
+    private fun initNavButtons() {
+
+        disposable.add(
+            navGallery.clicks()
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe {
+                    intentMediaManager.createGalleryIntent()
+                }
+        )
+
+        disposable.add(
+            navPhoto.clicks()
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe {
+                    intentMediaManager.createCameraWithPermission()
+                }
+        )
+
+        disposable.add(
+            navTag.clicks()
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe {
+                    makeToast(getString(R.string.develop))
+                }
+        )
+
+        disposable.add(
+            navUserIco.clicks()
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe {
+                    makeToast(getString(R.string.develop))
+                }
+        )
+
+        disposable.add(
+            navSend.clicks()
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe {
+                    makeToast(getString(R.string.develop))
+                }
+        )
+    }
+
+    private fun createImageViewForResult(): ImageView {
+
+        val imageView = ImageView(context)
+        val layParams = LinearLayout.LayoutParams(
+            200,
+            200
+        )
+        layParams.updateMargins(10,10,10,10)
+        imageView.layoutParams = layParams
+
+        disposable.add(
+            imageView.clicks().throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe {
+                    chipGroup.removeView(imageView)
+                }
+        )
+        return imageView
+    }
 
     override fun initRecycler() {
         super.initRecycler()
@@ -49,7 +124,9 @@ class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comment
             it.showBackButton()
             it.hideNavBar()
         }
+
         super.initAfterViewCreated()
+        initNavButtons()
     }
 
     override fun initViewModelCallBack() {
@@ -70,14 +147,37 @@ class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comment
     }
 
     override fun likeClick(adapterPosition: Int) {
-        makeToast("1")
+        makeToast(getString(R.string.develop))
     }
 
     override fun userClick(adapterPosition: Int) {
-        makeToast("2")
+        makeToast(getString(R.string.develop))
     }
 
     override fun replyClick(adapterPosition: Int) {
-        makeToast("3")
+        makeToast(getString(R.string.develop))
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if (data != null) {
+
+            val imageView = createImageViewForResult()
+            chipGroup.addView(imageView)
+
+            when (requestCode) {
+                IntentConstatnt.CAMERA -> {
+                    val image = data!!.extras!!.get("data") as Bitmap
+                    imageView.setImageBitmap(image)
+                }
+                IntentConstatnt.GALERY -> {
+                    GlideApp
+                        .with(App.appContext)
+                        .load(data.data)
+                        .centerCrop()
+                        .into(imageView)
+                }
+            }
+        }
     }
 }
