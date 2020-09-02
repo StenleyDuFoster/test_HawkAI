@@ -70,14 +70,14 @@ class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comment
     }
 
     override fun likeClick(adapterPosition: Int) {
-      //  makeToast("1")
+        makeToast("1")
     }
 
     override fun userClick(adapterPosition: Int) {
-       // makeToast("2")
+        makeToast("2")
     }
 
     override fun replyClick(adapterPosition: Int) {
-      //  makeToast("3")
+        makeToast("3")
     }
 }

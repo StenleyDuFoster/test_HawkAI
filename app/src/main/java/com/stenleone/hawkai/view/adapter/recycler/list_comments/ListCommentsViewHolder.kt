@@ -16,7 +16,9 @@ class ListCommentsViewHolder(
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
-    val compositeDisposable = CompositeDisposable()
+    companion object {
+        val compositeDisposable = CompositeDisposable()
+    }
 
     init {
         binding.apply {

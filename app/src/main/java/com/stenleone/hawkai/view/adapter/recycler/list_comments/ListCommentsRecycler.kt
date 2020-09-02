@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.stenleone.hawkai.databinding.CommentsItemBinding
 import com.stenleone.hawkai.model.data.get.comments.Result
+import com.stenleone.hawkai.util.easyInfo.makeToast
+import com.stenleone.hawkai.view.adapter.recycler.ListNewsRecycler
 import com.stenleone.hawkai.view.adapter.recycler.callback.CallBackFromListComments
 
 class ListCommentsRecycler :
@@ -42,8 +44,8 @@ class ListCommentsRecycler :
         }
     }
 
-    override fun onViewDetachedFromWindow(holder: ListCommentsViewHolder) {
-        super.onViewDetachedFromWindow(holder)
-        holder.compositeDisposable.dispose()
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        ListCommentsViewHolder.compositeDisposable.dispose()
     }
 }
