@@ -19,4 +19,7 @@
     <string name="develop">in develop</string>
     <string name="not_access_camera">no access to the camera</string>
 
+    <string name="chanel_name">HawkAi</string>
+    <string name="chanel_id">HawkAiCh</string>
+
 </resources>

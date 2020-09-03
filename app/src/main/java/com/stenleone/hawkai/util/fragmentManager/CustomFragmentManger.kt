@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.stenleone.hawkai.R
+import com.stenleone.hawkai.util.easyInfo.l
 
 class CustomFragmentManger(val activity: AppCompatActivity) {
 
+    lateinit var fragmentManager: FragmentManager
     lateinit var fragmentTransition: FragmentTransaction
     val containerId = R.id.fragmentContainer
 
@@ -32,11 +34,20 @@ class CustomFragmentManger(val activity: AppCompatActivity) {
         initFragmentTransition()
         fragmentTransition.remove(fragment)
         fragmentTransition.commit()
+
+    }
+
+    fun checkLastFragmentId() : String? {
+
+
+            return fragmentManager.fragments[fragmentManager.fragments.size - 1].tag
+
     }
 
     fun initFragmentTransition() {
 
-        fragmentTransition = activity.supportFragmentManager.beginTransaction()
+        fragmentManager = activity.supportFragmentManager
+        fragmentTransition = fragmentManager.beginTransaction()
         fragmentTransition.setCustomAnimations(
             R.anim.in_leaft_to_right, R.anim.out_leaft_to_right,
             R.anim.in_leaft_to_right, R.anim.out_leaft_to_right
