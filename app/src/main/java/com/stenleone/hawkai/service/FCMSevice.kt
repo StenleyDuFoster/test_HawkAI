@@ -2,23 +2,16 @@ package com.stenleone.hawkai.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.stenleone.hawkai.R
 import com.stenleone.hawkai.di.application.App
 import com.stenleone.hawkai.util.glide.GlideApp
-import com.stenleone.hawkai.view.activity.MainActivity
 import kotlin.random.Random
 
 class FCMService : FirebaseMessagingService() {
@@ -26,6 +19,10 @@ class FCMService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         showNotification(this, remoteMessage)
+    }
+
+    override fun onNewToken(p0: String) {
+        super.onNewToken(p0)
     }
 
     private fun showNotification(context: Context, remoteMessage: RemoteMessage) {
