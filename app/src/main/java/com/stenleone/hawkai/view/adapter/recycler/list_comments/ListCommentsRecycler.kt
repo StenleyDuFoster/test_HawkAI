@@ -3,13 +3,9 @@ package com.stenleone.hawkai.view.adapter.recycler.list_comments
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import androidx.recyclerview.widget.RecyclerView
-
 import com.stenleone.hawkai.databinding.CommentsItemBinding
 import com.stenleone.hawkai.model.data.get.comments.Result
-import com.stenleone.hawkai.util.easyInfo.makeToast
-import com.stenleone.hawkai.view.adapter.recycler.ListNewsRecycler
 import com.stenleone.hawkai.view.adapter.recycler.callback.CallBackFromListComments
 
 class ListCommentsRecycler :
@@ -37,10 +33,10 @@ class ListCommentsRecycler :
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (arrayView[position].parent == null) {
-            return View.GONE
+        return if (arrayView[position].parent == null) {
+            View.GONE
         } else {
-            return View.VISIBLE
+            View.VISIBLE
         }
     }
 

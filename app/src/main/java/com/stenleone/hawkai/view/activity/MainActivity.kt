@@ -2,33 +2,26 @@ package com.stenleone.hawkai.view.activity
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import android.view.View
-import androidx.annotation.RequiresApi
-
 import com.jakewharton.rxbinding3.view.clicks
-
 import com.stenleone.hawkai.R
 import com.stenleone.hawkai.service.TestService
 import com.stenleone.hawkai.util.constant.IntentConstant
 import com.stenleone.hawkai.util.easyInfo.makeToast
-
 import com.stenleone.hawkai.view.activity.base.BaseActivity
 import com.stenleone.hawkai.view.fragment.additionals.CommentsFragment
 import com.stenleone.hawkai.view.fragment.main.NewsFeedFragment
 import com.stenleone.hawkai.view.fragment.main.SearchFragment
 import com.stenleone.hawkai.view.fragment.main.SettingsFragment
-
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_toolbar.*
-
 import java.util.concurrent.TimeUnit
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
 
     var commentsFragment: CommentsFragment? = null
-    val searchFragment = SearchFragment()
-    val settingsFragment = SettingsFragment()
+    private val searchFragment = SearchFragment()
+    private val settingsFragment = SettingsFragment()
 
     fun showBackButton() {
         backClick.visibility = View.VISIBLE
@@ -110,7 +103,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     ) {
         when (requestCode) {
             IntentConstant.CAMERA -> {
-                if (grantResults.size > 0
+                if (grantResults.isNotEmpty()
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ) {
                     commentsFragment.let {

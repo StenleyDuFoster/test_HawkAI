@@ -166,7 +166,7 @@ class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comment
 
             when (requestCode) {
                 IntentConstant.CAMERA -> {
-                    val image = data!!.extras!!.get("data") as Bitmap
+                    val image = data.extras!!.get("data") as Bitmap
                     imageView.setImageBitmap(image)
                 }
                 IntentConstant.GALLERY -> {

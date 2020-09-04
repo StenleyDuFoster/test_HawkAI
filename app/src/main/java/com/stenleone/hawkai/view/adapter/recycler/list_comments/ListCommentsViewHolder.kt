@@ -28,7 +28,7 @@ class ListCommentsViewHolder(
                     imageUser.clicks()
                         .throttleFirst(1, TimeUnit.SECONDS)
                         .subscribe {
-                            listener?.userClick(adapterPosition)
+                            listener.userClick(adapterPosition)
                         }
                 )
 
@@ -36,7 +36,7 @@ class ListCommentsViewHolder(
                     replyClick.clicks()
                         .throttleFirst(1, TimeUnit.SECONDS)
                         .subscribe {
-                            listener?.replyClick(adapterPosition)
+                            listener.replyClick(adapterPosition)
                         }
                 )
 
@@ -44,7 +44,7 @@ class ListCommentsViewHolder(
                     likeClick.clicks()
                         .throttleFirst(1, TimeUnit.SECONDS)
                         .subscribe {
-                            listener?.likeClick(adapterPosition)
+                            listener.likeClick(adapterPosition)
                         }
                 )
 

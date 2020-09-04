@@ -30,7 +30,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     private fun stuDaInitPass() { //debug code !!DELETE!!
-        codeEditText.setText("222222")
+        codeEditText.setText(getString(R.string.DEBUG_CODE))
     }
 
     override fun animLoader(isAnimate: Boolean) {

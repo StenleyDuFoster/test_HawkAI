@@ -1,6 +1,5 @@
 package com.stenleone.hawkai.view.adapter.recycler.binding
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -36,27 +35,9 @@ fun dateConverter(view: TextView, dateText: String?) {
     }
 }
 
-@BindingAdapter("loadImage")
-fun loadImage(view: ImageView, imageUrl: String?) {
-    if (imageUrl != null) {
-        view.visibility = View.VISIBLE
-
-        GlideApp
-            .with(view.context)
-            .load(imageUrl)
-            .centerCrop()
-            .into(view)
-
-    } else {
-        view.visibility = View.GONE
-    }
-}
-
 @BindingAdapter("getComment")
 fun getComment(view: TextView, comment: Int) {
-    if (comment > 0) {
-        view.text = comment.toString() + " comments"
-    } else {
+    if (comment > 0) view.text = "$comment comments" else {
         view.text = ""
     }
 }

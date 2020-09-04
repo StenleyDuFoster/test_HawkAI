@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_page_hud.view.*
 class HudImageLay @JvmOverloads constructor(
     context: Context,
     startPosition: Int = 0,
-    val totalPage: Int = 1,
+    private val totalPage: Int = 1,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
@@ -23,6 +23,6 @@ class HudImageLay @JvmOverloads constructor(
     }
 
     fun update(page: Int) {
-        textNumberPage.text = (page + 1).toString() + "/" + totalPage.toString()
+        textNumberPage.setText((page + 1).toString() + "/" + totalPage.toString())
     }
 }

@@ -11,14 +11,14 @@ import com.stenleone.hawkai.view.activity.base.BaseActivity
 
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseFragment(val layId: Int) : Fragment() {
+abstract class BaseFragment(private val layId: Int) : Fragment() {
 
     lateinit var disposable: CompositeDisposable
 
     abstract fun initAfterViewCreated()
     open fun initViewModelCallBack() {}
 
-    open protected fun animLoader(isAnimate: Boolean) {
+    protected open fun animLoader(isAnimate: Boolean) {
 
         activity.let {
             (it as BaseActivity).apply {
