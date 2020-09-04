@@ -31,7 +31,7 @@ class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comment
     val intentMediaManager = IntentMediaManager(this)
     var postId = 0
 
-    private var commentsResult: List<Result>? = null
+    private var commentsResult: ArrayList<Result> = ArrayList()
 
     private fun initNavButtons() {
 
@@ -95,9 +95,17 @@ class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comment
         return imageView
     }
 
+    override fun initSwipeToRefresh() {
+        swipeToRefreshLay.setOnRefreshListener {
+            getContent()
+            commentsResult = ArrayList()
+        }
+    }
+
     override fun initRecycler() {
         super.initRecycler()
         adapterListCommentsRecycler.listener = this
+        adapterListCommentsRecycler.arrayView = commentsResult
         recycler.adapter = adapterListCommentsRecycler
     }
 
@@ -108,12 +116,7 @@ class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comment
 
     override fun onContentLoaded() {
         super.onContentLoaded()
-        if (commentsResult != null) {
-            (recycler.adapter as ListCommentsRecycler).apply {
-                arrayView = ArrayList(commentsResult)
-                notifyDataSetChanged()
-            }
-        }
+        (recycler.adapter as ListCommentsRecycler).notifyDataSetChanged()
     }
 
     override fun initAfterViewCreated() {
@@ -132,13 +135,12 @@ class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comment
         viewModel.apply {
 
             liveComment.observe(viewLifecycleOwner, {
-                commentsResult = it
+                commentsResult.addAll(it)
                 onContentLoaded()
             })
 
             liveError.observe(viewLifecycleOwner, {
                 makeToast(it)
-                commentsResult = null
                 onContentLoaded()
             })
         }

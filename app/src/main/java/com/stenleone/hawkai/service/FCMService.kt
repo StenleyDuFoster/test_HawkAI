@@ -1,24 +1,19 @@
 package com.stenleone.hawkai.service
 
+import android.annotation.SuppressLint
 import android.content.Context
-
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-
 import com.stenleone.hawkai.App
 import com.stenleone.hawkai.util.glide.GlideApp
-
 import com.stenleone.hawkai.util.notification.NotificationBuilder
 
+@SuppressLint("MissingFirebaseInstanceTokenRefresh")
 class FCMService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         showNotification(this, remoteMessage)
-    }
-
-    override fun onNewToken(token: String) {
-        super.onNewToken(token)
     }
 
     private fun showNotification(context: Context, remoteMessage: RemoteMessage) {

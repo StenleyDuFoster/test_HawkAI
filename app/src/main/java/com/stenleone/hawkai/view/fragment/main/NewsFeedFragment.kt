@@ -20,12 +20,20 @@ class NewsFeedFragment : BaseLoaderListContentFragment(R.layout.fragment_news_fe
 
     private val viewModel: PostNewsViewModel by inject()
     private val adapterListNews: ListNewsRecycler by inject()
-    private var postResult: List<Result>? = null
+    private var postResult: ArrayList<Result> = ArrayList()
+
+    override fun initSwipeToRefresh() {
+        swipeToRefreshLay.setOnRefreshListener {
+            getContent()
+            postResult = ArrayList()
+        }
+    }
 
     override fun initRecycler() {
         super.initRecycler()
         adapterListNews.listener = this
         recycler.adapter = adapterListNews
+        (recycler.adapter as ListNewsRecycler).arrayView = postResult
     }
 
     override fun getContent() {
@@ -35,12 +43,7 @@ class NewsFeedFragment : BaseLoaderListContentFragment(R.layout.fragment_news_fe
 
     override fun onContentLoaded() {
         super.onContentLoaded()
-        if (postResult != null) {
-            (recycler.adapter as ListNewsRecycler).apply {
-                arrayView = ArrayList(postResult)
-                notifyDataSetChanged()
-            }
-        }
+        (recycler.adapter as ListNewsRecycler).notifyDataSetChanged()
     }
 
     override fun initViewModelCallBack() {
@@ -48,13 +51,12 @@ class NewsFeedFragment : BaseLoaderListContentFragment(R.layout.fragment_news_fe
         viewModel.apply {
 
             livePost.observe(viewLifecycleOwner, {
-                postResult = it.results
+                postResult.addAll(it.results)
                 onContentLoaded()
             })
 
             liveError.observe(viewLifecycleOwner, {
                 makeToast(ApiConstant.ERROR_TEXT + it)
-                postResult = null
                 onContentLoaded()
             })
         }

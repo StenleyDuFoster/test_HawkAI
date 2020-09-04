@@ -16,7 +16,7 @@ abstract class BaseFragment(val layId: Int) : Fragment() {
     lateinit var disposable: CompositeDisposable
 
     abstract fun initAfterViewCreated()
-    open fun initViewModelCallBack() { }
+    open fun initViewModelCallBack() {}
 
     open protected fun animLoader(isAnimate: Boolean) {
 
@@ -46,9 +46,10 @@ abstract class BaseFragment(val layId: Int) : Fragment() {
     }
 
     override fun onDestroyView() {
-        if(!disposable.isDisposed) {
+        if (!disposable.isDisposed) {
             disposable.dispose()
         }
+        view?.let { (activity as BaseActivity).hideKeyboard(it) }
         super.onDestroyView()
     }
 }

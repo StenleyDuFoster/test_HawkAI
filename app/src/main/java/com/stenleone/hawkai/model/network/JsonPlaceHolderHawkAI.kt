@@ -7,21 +7,23 @@ import com.stenleone.hawkai.model.data.post.PostAuth
 import com.stenleone.hawkai.util.constant.ApiConstant
 import io.reactivex.Single
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface JsonPlaceHolderHawkAI {
 
     @POST(ApiConstant.LOGIN_URL)
     fun postLogin(@Body auth: PostAuth): Single<Response<LoginHawkAIResponseEntity>>
 
-    @GET(ApiConstant.POST_URL + ApiConstant.LIMIT)
-    fun getPosts(): Single<Response<PostResponseEntity>>
+    @GET(ApiConstant.POST_URL)
+    fun getPosts(
+        @Query("limit") limit: Int = 20,
+        @Query("offset") offset: Int = 0
+    ): Single<Response<PostResponseEntity>>
 
-    @GET(ApiConstant.POST_URL + "{post_number}/" + ApiConstant.COMMENT_URL + ApiConstant.LIMIT)
+    @GET(ApiConstant.COMMENT_URL)
     fun getComments(
         @Path("post_number") post_number: Int,
+        @Query("limit") limit: Int = 20,
+        @Query("offset") offset: Int = 0
     ): Single<Response<CommentsEntity>>
 }

@@ -4,11 +4,11 @@ object ApiConstant {
 
     const val BASE_URL = "https://dev.hawkaiapp.com/"
 
-    const val API = "api/"
-    const val LIMIT = "?limit=20&offset=0"
-    const val LOGIN_URL = API + "auth/login"
-    const val POST_URL = API + "post/"
-    const val COMMENT_URL = "comment/"
+    private const val API = "api"
+
+    const val LOGIN_URL = "$API/auth/login"
+    const val POST_URL = "$API/post/"
+    const val COMMENT_URL = "$POST_URL{post_number}/comment/"
 
     const val AUTH = "Authorization"
     const val TOKEN_PREFIX = "JWT"
