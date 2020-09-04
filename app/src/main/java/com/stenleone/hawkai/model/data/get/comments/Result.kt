@@ -1,5 +1,8 @@
 package com.stenleone.hawkai.model.data.get.comments
 
+import com.google.gson.annotations.SerializedName
+import com.stenleone.hawkai.model.data.get.standart.Author
+
 data class Result(
     val author: Author,
     val childs: List<Result>,
@@ -7,7 +10,8 @@ data class Result(
     val create_date: String,
     val id: Int,
     val images: List<Any>,
-    val is_liked: Boolean,
+    @SerializedName("is_liked")
+    val isLiked: Boolean,
     val level: Int,
     val likes: Int,
     val parent: Any,

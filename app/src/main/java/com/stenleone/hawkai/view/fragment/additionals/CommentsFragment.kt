@@ -29,9 +29,8 @@ class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comment
     private val viewModel: CommentsPostViewModel by inject()
     private val adapterListCommentsRecycler: ListCommentsRecycler by inject()
     val intentMediaManager = IntentMediaManager(this)
-    var postId = 0
-
     private var commentsResult: ArrayList<Result> = ArrayList()
+    var postId = 0
 
     private fun initNavButtons() {
 

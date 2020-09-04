@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:fontFamily="@string/font_main"
-                        android:text="@{result.author.first_name + ' ' + result.author.last_name}"
+                        android:text="@{result.author.firstName + ' ' + result.author.lastName}"
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
                         android:padding="5dp"
                         android:text="@string/user_pro"
                         android:textColor="@color/colorLogo"
-                        android:visibility="@{result.author._pro ? View.VISIBLE : View.GONE}" />
+                        android:visibility="@{result.author.pro ? View.VISIBLE : View.GONE}" />
                 </LinearLayout>
 
                 <TextView
@@ -125,7 +125,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@string/font_main"
                         android:gravity="end"
-                        app:getComment="@{result.comments_count}" />
+                        app:getComment="@{result.commentsCount}" />
                 </LinearLayout>
 
                 <TextView

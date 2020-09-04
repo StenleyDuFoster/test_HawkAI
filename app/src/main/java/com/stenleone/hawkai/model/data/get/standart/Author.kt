@@ -1,8 +1,10 @@
-package com.stenleone.hawkai.model.data.get.post_news
+package com.stenleone.hawkai.model.data.get.standart
 
 import com.google.gson.annotations.SerializedName
 
-data class Reviewer(
+data class Author(
+    val company: String,
+    val country: String,
     @SerializedName("default_native_language")
     val defaultNativeLanguage: String,
     val degrees: List<Any>,
@@ -12,7 +14,7 @@ data class Reviewer(
     @SerializedName("english_last_name")
     val englishLastName: String,
     @SerializedName("first_name")
-    val first_name: String,
+    val firstName: String,
     val id: Int,
     val image: String,
     @SerializedName("image_height")
@@ -21,6 +23,7 @@ data class Reviewer(
     val imageWidth: Int,
     @SerializedName("is_pro")
     val isPro: Boolean,
+    val languages: List<String>,
     @SerializedName("last_name")
     val lastName: String,
     @SerializedName("native_first_name")
@@ -28,5 +31,7 @@ data class Reviewer(
     @SerializedName("native_last_name")
     val nativeLastName: String,
     val phone: String,
-    val points: Int
+    val points: Int,
+    val specializations: List<String>,
+    val title: String
 )

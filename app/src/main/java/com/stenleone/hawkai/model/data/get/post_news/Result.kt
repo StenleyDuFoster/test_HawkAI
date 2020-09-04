@@ -1,13 +1,20 @@
 package com.stenleone.hawkai.model.data.get.post_news
 
+import com.google.gson.annotations.SerializedName
+import com.stenleone.hawkai.model.data.get.standart.Author
+
 data class Result(
-    val approved_status: String,
+    @SerializedName("approved_status")
+    val approvedStatus: String,
     val author: Author,
-    val comments_count: Int,
-    val create_date: String,
+    @SerializedName("comments_count")
+    val commentsCount: Int,
+    @SerializedName("create_date")
+    val createDate: String,
     val id: Int,
     val images: List<Image>,
-    val latest_comments: List<LatestComment>,
+    @SerializedName("latest_comments")
+    val latestComments: List<LatestComment>,
     val location: Location,
     val location_name: String,
     val quiz: Quiz,

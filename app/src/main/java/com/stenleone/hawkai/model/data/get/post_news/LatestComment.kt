@@ -1,13 +1,19 @@
 package com.stenleone.hawkai.model.data.get.post_news
 
+import com.google.gson.annotations.SerializedName
+import com.stenleone.hawkai.model.data.get.standart.Author
+
 data class LatestComment(
-    val author: AuthorX,
-    val childs: List<Any>,
+    val author: Author,
+    @SerializedName("childs")
+    val child: List<Any>,
     val comment: String,
-    val create_date: String,
+    @SerializedName("create_date")
+    val createDate: String,
     val id: Int,
-    val images: List<ImageX>,
-    val is_liked: Boolean,
+    val images: List<Image>,
+    @SerializedName("is_liked")
+    val isLiked: Boolean,
     val level: Int,
     val likes: Int,
     val parent: Int,
