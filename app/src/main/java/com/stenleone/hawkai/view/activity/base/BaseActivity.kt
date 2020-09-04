@@ -1,16 +1,12 @@
 package com.stenleone.hawkai.view.activity.base
 
-import android.app.Activity
-import android.content.IntentFilter
 import android.content.pm.ActivityInfo
-import android.net.ConnectivityManager
 import android.os.Bundle
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.stenleone.hawkai.receiver.NetworkChangeReceiver
 import com.stenleone.hawkai.util.anim.LoadLeyAnimator
-import com.stenleone.hawkai.util.fragmentManager.CustomFragmentManger
+import com.stenleone.hawkai.util.extensions.initReceiver
+import com.stenleone.hawkai.util.fragment_manager.CustomFragmentManger
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.load_lay.*
@@ -21,17 +17,6 @@ abstract class BaseActivity(private val layId: Int) : AppCompatActivity() {
     val fragmentManager = CustomFragmentManger(this)
     lateinit var disposable: CompositeDisposable
     lateinit var loadLayAnim: LoadLeyAnimator
-
-    fun hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-    }
-
-    private fun initNetworkReceiver() {
-        val intentFilter = IntentFilter()
-        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
-        registerReceiver(networkReceiver, intentFilter)
-    }
 
     open fun initAfterCreate() {
         disposable = CompositeDisposable()
@@ -45,7 +30,7 @@ abstract class BaseActivity(private val layId: Int) : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initNetworkReceiver()
+        initReceiver(networkReceiver)
         setContentView(layId)
         initAfterCreate()
     }

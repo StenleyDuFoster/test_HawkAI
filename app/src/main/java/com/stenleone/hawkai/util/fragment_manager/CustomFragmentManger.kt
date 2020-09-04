@@ -1,4 +1,4 @@
-package com.stenleone.hawkai.util.fragmentManager
+package com.stenleone.hawkai.util.fragment_manager
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

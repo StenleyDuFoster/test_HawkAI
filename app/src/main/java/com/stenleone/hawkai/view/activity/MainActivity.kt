@@ -2,7 +2,9 @@ package com.stenleone.hawkai.view.activity
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.view.View
+import androidx.annotation.RequiresApi
 import com.jakewharton.rxbinding3.view.clicks
 import com.stenleone.hawkai.R
 import com.stenleone.hawkai.service.TestService
@@ -80,13 +82,14 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun initAfterCreate() {
         super.initAfterCreate()
         initBottomNavigation()
         initBackClick()
         fragmentManager.addFragmentToFragmentManager(NewsFeedFragment())
-
-        //startService((Intent(this,TestService::class.java)))
+        //startService()
+        startForegroundService((Intent(this, TestService::class.java)))
     }
 
     override fun onBackPressed() {

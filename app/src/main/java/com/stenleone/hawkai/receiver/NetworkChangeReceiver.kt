@@ -24,7 +24,7 @@ class NetworkChangeReceiver : BroadcastReceiver() {
             networkState = false
 
             if(networkState != oldNetworkState) {
-                makeToast("соединение потеряно")
+                context.makeToast("соединение потеряно")
             }
 
             oldNetworkState = networkState
@@ -34,7 +34,7 @@ class NetworkChangeReceiver : BroadcastReceiver() {
             networkState = true
 
             if(networkState != oldNetworkState) {
-                makeToast("соединение востановлено")
+                context.makeToast("соединение востановлено")
             }
 
             oldNetworkState = networkState

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import androidx.fragment.app.Fragment
+import com.stenleone.hawkai.util.extensions.hideKeyboard
 
 import com.stenleone.hawkai.view.activity.base.BaseActivity
 
@@ -17,7 +18,7 @@ abstract class BaseFragment(private val layId: Int) : Fragment() {
     lateinit var disposable: CompositeDisposable
 
     abstract fun initAfterViewCreated()
-    open fun initViewModelCallBack() {}
+    open fun initViewModelCallBack() { }
 
     protected open fun animLoader(isAnimate: Boolean) {
 
@@ -50,7 +51,7 @@ abstract class BaseFragment(private val layId: Int) : Fragment() {
         if (!disposable.isDisposed) {
             disposable.dispose()
         }
-        view?.let { (activity as BaseActivity).hideKeyboard(it) }
+        activity?.hideKeyboard()
         super.onDestroyView()
         clearFindViewByIdCache()
     }

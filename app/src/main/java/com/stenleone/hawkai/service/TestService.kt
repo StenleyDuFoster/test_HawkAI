@@ -19,7 +19,14 @@ class TestService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        //loopToast()
+        startForeground(1,  NotificationBuilder(
+            applicationContext,
+            "Notify start",
+            "ha ha",
+            "i hack this"
+        )
+            .createBuiltNotification().build())
+        loopToast()
     }
 
     private fun loopToast() {
