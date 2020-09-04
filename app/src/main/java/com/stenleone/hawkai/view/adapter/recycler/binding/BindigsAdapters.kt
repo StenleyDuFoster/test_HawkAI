@@ -8,10 +8,7 @@ import androidx.databinding.BindingAdapter
 
 import com.bumptech.glide.request.RequestOptions
 import com.stenleone.hawkai.util.glide.GlideApp
-
-import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
 
 @BindingAdapter("loadCircleImage")
 fun loadCircleImage(view: ImageView, imageUrl: String?) {

@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import com.stenleone.hawkai.R
-import com.stenleone.hawkai.di.application.App
+import com.stenleone.hawkai.App
 import com.stenleone.hawkai.util.easyInfo.makeToast
 
 class TextCopyPopMany (view: View) {

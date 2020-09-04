@@ -9,9 +9,10 @@ import com.stenleone.hawkai.model.view_model.base.BaseViewModel
 import com.stenleone.hawkai.util.constant.ApiConstant
 
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
-class CommentsPostViewModel(val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI) : BaseViewModel() {
+class CommentsPostViewModel(private val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI) : BaseViewModel() {
 
     val liveComment = MutableLiveData<ArrayList<Result>>()
 
@@ -31,7 +32,7 @@ class CommentsPostViewModel(val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI) :
                 {
                     liveError.postValue(it.message)
                 }
-            )
+            ).addTo(compositeDisposable)
     }
 
     private fun addChildResultToResults(response: CommentsEntity?): ArrayList<Result> {

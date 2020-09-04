@@ -10,8 +10,8 @@ import com.stenleone.hawkai.model.data.get.post_news.Result
 import com.stenleone.hawkai.view.adapter.recycler.callback.CallBackFromListNews
 import com.stenleone.hawkai.view.adapter.view_pager.SlideImageAdapter
 import io.reactivex.disposables.CompositeDisposable
-import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import java.util.concurrent.TimeUnit
 
 class ListNewsRecycler :
@@ -83,6 +83,8 @@ class ListNewsRecycler :
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
-        compositeDisposable.dispose()
+        if(!compositeDisposable.isDisposed) {
+            compositeDisposable.dispose()
+        }
     }
 }

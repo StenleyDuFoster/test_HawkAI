@@ -12,6 +12,7 @@ import com.stenleone.hawkai.util.constant.ApiConstant
 import com.stenleone.hawkai.util.shared_preferences.SharedPreferencesManager
 
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
 class PostNewsViewModel(val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI) : BaseViewModel() {
@@ -34,6 +35,6 @@ class PostNewsViewModel(val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI) : Bas
                 {
                     liveError.postValue(it.message)
                 }
-            )
+            ).addTo(compositeDisposable)
     }
 }

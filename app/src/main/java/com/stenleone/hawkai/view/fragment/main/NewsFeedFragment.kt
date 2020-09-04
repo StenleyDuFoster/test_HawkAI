@@ -6,7 +6,6 @@ import com.stenleone.hawkai.model.view_model.PostNewsViewModel
 import com.stenleone.hawkai.util.constant.ApiConstant
 import com.stenleone.hawkai.util.easyInfo.makeToast
 import com.stenleone.hawkai.view.activity.MainActivity
-import com.stenleone.hawkai.view.activity.base.BaseActivity
 import com.stenleone.hawkai.view.adapter.recycler.ListNewsRecycler
 import com.stenleone.hawkai.view.adapter.recycler.callback.CallBackFromListNews
 import com.stenleone.hawkai.view.fragment.additionals.CommentsFragment
@@ -14,12 +13,10 @@ import com.stenleone.hawkai.view.fragment.base.BaseLoaderListContentFragment
 
 import kotlinx.android.synthetic.main.fragment_news_feed.*
 
-import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
+import org.koin.android.ext.android.inject
 
 class NewsFeedFragment : BaseLoaderListContentFragment(R.layout.fragment_news_feed),
-    CallBackFromListNews,
-    KoinComponent {
+    CallBackFromListNews {
 
     private val viewModel: PostNewsViewModel by inject()
     private val adapterListNews: ListNewsRecycler by inject()

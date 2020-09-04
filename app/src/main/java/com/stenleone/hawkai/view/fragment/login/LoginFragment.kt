@@ -6,17 +6,14 @@ import com.stenleone.hawkai.R
 import com.stenleone.hawkai.model.view_model.LoginViewModel
 import com.stenleone.hawkai.view.activity.LoginActivity
 import com.stenleone.hawkai.view.fragment.base.BaseFragment
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
 
 import kotlinx.android.synthetic.main.fragment_login.*
 
-import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
+import org.koin.android.ext.android.inject
 
 import java.util.concurrent.TimeUnit
 
-class LoginFragment : BaseFragment(R.layout.fragment_login), KoinComponent {
+class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private val viewModel: LoginViewModel by inject()
 

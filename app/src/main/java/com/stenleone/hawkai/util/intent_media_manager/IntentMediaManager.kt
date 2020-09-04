@@ -6,7 +6,7 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.stenleone.hawkai.di.application.App
+import com.stenleone.hawkai.App
 import com.stenleone.hawkai.util.constant.IntentConstant
 
 

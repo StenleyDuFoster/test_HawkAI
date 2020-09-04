@@ -6,7 +6,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding3.view.clicks
 import com.stenleone.hawkai.R
-import com.stenleone.hawkai.di.application.App
+import com.stenleone.hawkai.App
 import com.stenleone.hawkai.model.data.get.post_news.Image
 import com.stenleone.hawkai.util.glide.GlideApp
 import com.stenleone.hawkai.view.adapter.view_pager.hud.HudImageLay
@@ -72,6 +72,8 @@ class SlideImageAdapter : RecyclerView.Adapter<SlideImageAdapter.PagerVH>() {
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
-        compositeDisposable.dispose()
+        if(!compositeDisposable.isDisposed) {
+            compositeDisposable.dispose()
+        }
     }
 }

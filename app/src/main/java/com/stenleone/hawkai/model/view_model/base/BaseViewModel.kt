@@ -2,11 +2,18 @@ package com.stenleone.hawkai.model.view_model.base
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.stenleone.hawkai.model.network.JsonPlaceHolderHawkAI
-import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
+import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseViewModel : ViewModel(), KoinComponent {
+abstract class BaseViewModel : ViewModel() {
+
+    val compositeDisposable = CompositeDisposable()
 
     val liveError = MutableLiveData<String>()
+
+    override fun onCleared() {
+        if(!compositeDisposable.isDisposed) {
+            compositeDisposable.dispose()
+        }
+        super.onCleared()
+    }
 }

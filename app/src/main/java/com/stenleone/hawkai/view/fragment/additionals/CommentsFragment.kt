@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import androidx.core.view.updateMargins
 import com.jakewharton.rxbinding3.view.clicks
 import com.stenleone.hawkai.R
-import com.stenleone.hawkai.di.application.App
+import com.stenleone.hawkai.App
 import com.stenleone.hawkai.model.data.get.comments.Result
 import com.stenleone.hawkai.model.view_model.CommentsPostViewModel
 import com.stenleone.hawkai.util.constant.IntentConstant
@@ -20,12 +20,11 @@ import com.stenleone.hawkai.view.adapter.recycler.list_comments.ListCommentsRecy
 import com.stenleone.hawkai.view.fragment.base.BaseLoaderListContentFragment
 import kotlinx.android.synthetic.main.fragment_news_feed.*
 import kotlinx.android.synthetic.main.nav_send_system.*
-import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
+import org.koin.android.ext.android.inject
 import java.util.concurrent.TimeUnit
 
 class CommentsFragment : BaseLoaderListContentFragment(R.layout.fragment_comments),
-    CallBackFromListComments, KoinComponent {
+    CallBackFromListComments {
 
     private val viewModel: CommentsPostViewModel by inject()
     private val adapterListCommentsRecycler: ListCommentsRecycler by inject()

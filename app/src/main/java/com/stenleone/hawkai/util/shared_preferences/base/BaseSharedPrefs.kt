@@ -1,7 +1,7 @@
 package com.stenleone.hawkai.util.shared_preferences.base
 
 import android.content.Context
-import com.stenleone.hawkai.di.application.App
+import com.stenleone.hawkai.App
 import com.stenleone.hawkai.util.constant.SharedPreferencesConstant
 
 abstract class BaseSharedPrefs {

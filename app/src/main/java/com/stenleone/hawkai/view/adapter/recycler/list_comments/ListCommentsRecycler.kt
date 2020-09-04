@@ -46,6 +46,8 @@ class ListCommentsRecycler :
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
-        ListCommentsViewHolder.compositeDisposable.dispose()
+        if(!ListCommentsViewHolder.compositeDisposable.isDisposed) {
+            ListCommentsViewHolder.compositeDisposable.dispose()
+        }
     }
 }

@@ -11,6 +11,7 @@ import com.stenleone.hawkai.util.constant.ApiConstant
 import com.stenleone.hawkai.util.shared_preferences.SharedPreferencesManager
 
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
 class LoginViewModel(val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI) : BaseViewModel() {
@@ -40,6 +41,6 @@ class LoginViewModel(val jsonPlaceHolderFitPlan: JsonPlaceHolderHawkAI) : BaseVi
                 {
                     liveError.postValue(it.message)
                 }
-            )
+            ).addTo(compositeDisposable)
     }
 }

@@ -35,7 +35,9 @@ abstract class BaseActivity(val layId: Int) : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        disposable.dispose()
+        if(!disposable.isDisposed) {
+            disposable.dispose()
+        }
         super.onDestroy()
     }
 }
