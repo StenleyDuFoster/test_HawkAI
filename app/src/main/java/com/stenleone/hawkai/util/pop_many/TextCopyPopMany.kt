@@ -20,7 +20,7 @@ class TextCopyPopMany (view: View) {
                 R.id.copy -> {
                     val clipboard: ClipboardManager =
                         App.appContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                    val clip = ClipData.newPlainText("", (view as TextView).getText().toString())
+                    val clip = ClipData.newPlainText("", (view as TextView).text.toString())
                     clipboard.setPrimaryClip(clip)
                     makeToast("text copied")
                     true

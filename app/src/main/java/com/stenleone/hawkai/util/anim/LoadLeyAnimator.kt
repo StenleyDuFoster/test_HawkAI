@@ -4,7 +4,7 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
 
-class LoadLeyAnimator(val ico: View, val bc: View) {
+class LoadLeyAnimator(private val ico: View, private val bc: View) {
 
     fun loadAnim() {
 
@@ -23,7 +23,7 @@ class LoadLeyAnimator(val ico: View, val bc: View) {
         rotate.repeatCount = ObjectAnimator.INFINITE
 
         anim.play(scaleDownX).with(scaleDownY).with(rotate)
-        anim.setDuration(800)
+        anim.duration = 800
         anim.start()
     }
 
@@ -31,8 +31,8 @@ class LoadLeyAnimator(val ico: View, val bc: View) {
 
         val bcAnim = ObjectAnimator.ofFloat(bc, View.ALPHA, bc.alpha, 0.6f)
         val icoAnim = ObjectAnimator.ofFloat(ico, View.ALPHA, ico.alpha, 1f)
-        bcAnim.setDuration(200)
-        icoAnim.setDuration(200)
+        bcAnim.duration = 200
+        icoAnim.duration = 200
         bcAnim.start()
         icoAnim.start()
     }
@@ -41,8 +41,8 @@ class LoadLeyAnimator(val ico: View, val bc: View) {
 
         val bcAnim = ObjectAnimator.ofFloat(bc, View.ALPHA, bc.alpha, 0f)
         val icoAnim = ObjectAnimator.ofFloat(ico, View.ALPHA, ico.alpha, 0f)
-        bcAnim.setDuration(400)
-        icoAnim.setDuration(400)
+        bcAnim.duration = 400
+        icoAnim.duration = 400
         bcAnim.start()
         icoAnim.start()
     }

@@ -12,11 +12,11 @@ import kotlin.random.Random
 
 class NotificationBuilder(
     val context: Context,
-    val title: String = "",
-    val subTitle: String = "",
-    val bigText: String = "",
-    val channelId: String = context.getString(R.string.chanel_id),
-    val channelName: String = context.getString(R.string.chanel_name)
+    private val title: String = "",
+    private val subTitle: String = "",
+    private val bigText: String = "",
+    private val channelId: String = context.getString(R.string.chanel_id),
+    private val channelName: String = context.getString(R.string.chanel_name)
 ) {
 
     fun createNotificationManager(): NotificationManager {
@@ -36,7 +36,7 @@ class NotificationBuilder(
     }
 
     fun createBuiltNotification(): NotificationCompat.Builder {
-        val builtNotification = NotificationCompat.Builder(context, channelId)
+        return NotificationCompat.Builder(context, channelId)
             .setContentTitle(title)
             .setContentText(subTitle)
             .setStyle(NotificationCompat.BigTextStyle().bigText(bigText))
@@ -48,7 +48,6 @@ class NotificationBuilder(
             .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
             .setVibrate(longArrayOf(500, 500, 500, 500))
             .setAutoCancel(true)
-        return builtNotification
     }
 
     fun createDefaultNotify() {

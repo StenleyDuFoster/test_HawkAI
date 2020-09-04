@@ -5,13 +5,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.stenleone.hawkai.R
-import com.stenleone.hawkai.util.easyInfo.l
 
 class CustomFragmentManger(val activity: AppCompatActivity) {
 
-    lateinit var fragmentManager: FragmentManager
-    lateinit var fragmentTransition: FragmentTransaction
-    val containerId = R.id.fragmentContainer
+    private lateinit var fragmentManager: FragmentManager
+    private lateinit var fragmentTransition: FragmentTransaction
+    private val containerId = R.id.fragmentContainer
 
     fun addWithBackStackFragmentToFragmentManager(fragment: Fragment) {
 
@@ -44,7 +43,7 @@ class CustomFragmentManger(val activity: AppCompatActivity) {
 
     }
 
-    fun initFragmentTransition() {
+    private fun initFragmentTransition() {
 
         fragmentManager = activity.supportFragmentManager
         fragmentTransition = fragmentManager.beginTransaction()
