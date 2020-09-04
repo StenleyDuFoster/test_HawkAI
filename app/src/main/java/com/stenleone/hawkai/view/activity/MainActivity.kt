@@ -86,7 +86,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         initBackClick()
         fragmentManager.addFragmentToFragmentManager(NewsFeedFragment())
 
-        startService((Intent(this,TestService::class.java)))
+        //startService((Intent(this,TestService::class.java)))
     }
 
     override fun onBackPressed() {

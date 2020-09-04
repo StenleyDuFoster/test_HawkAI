@@ -32,7 +32,7 @@ class FCMService : FirebaseMessagingService() {
                 val imageBitmap = GlideApp.with(App.appContext)
                     .asBitmap()
                     .load(remoteMessage.notification?.imageUrl!!)
-                    .into(100, 100)
+                    .into(1000, 1000)
                     .get()
 
                 notificationBuild.setLargeIcon(imageBitmap)

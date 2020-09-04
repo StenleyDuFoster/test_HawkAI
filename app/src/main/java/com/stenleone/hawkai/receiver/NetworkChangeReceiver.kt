@@ -10,7 +10,7 @@ import com.stenleone.hawkai.util.easyInfo.makeToast
 class NetworkChangeReceiver : BroadcastReceiver() {
 
     companion object {
-        var newNetworkState = true
+        var networkState = true
     }
 
     private var oldNetworkState = true
@@ -21,23 +21,23 @@ class NetworkChangeReceiver : BroadcastReceiver() {
 
         if(cm.activeNetworkInfo == null)
         {
-            newNetworkState = false
+            networkState = false
 
-            if(newNetworkState != oldNetworkState) {
+            if(networkState != oldNetworkState) {
                 makeToast("соединение потеряно")
             }
 
-            oldNetworkState = newNetworkState
+            oldNetworkState = networkState
         }
         else
         {
-            newNetworkState = true
+            networkState = true
 
-            if(newNetworkState != oldNetworkState) {
+            if(networkState != oldNetworkState) {
                 makeToast("соединение востановлено")
             }
 
-            oldNetworkState = newNetworkState
+            oldNetworkState = networkState
         }
     }
 }

@@ -11,7 +11,7 @@ import com.stenleone.hawkai.R
 import kotlin.random.Random
 
 class NotificationBuilder(
-    val context: Context,
+    private val context: Context,
     private val title: String = "",
     private val subTitle: String = "",
     private val bigText: String = "",
@@ -40,7 +40,6 @@ class NotificationBuilder(
             .setContentTitle(title)
             .setContentText(subTitle)
             .setStyle(NotificationCompat.BigTextStyle().bigText(bigText))
-            .setColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
             .setSmallIcon(R.drawable.load_drawable)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setWhen(System.currentTimeMillis())

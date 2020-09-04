@@ -9,7 +9,7 @@ class CashInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
 
         var request = chain.request()
-        request = if (NetworkChangeReceiver.newNetworkState) {
+        request = if (NetworkChangeReceiver.networkState) {
             request.newBuilder().header("Cache-Control", "public, max-age=" + 5).build()
         } else {
             request.newBuilder()
