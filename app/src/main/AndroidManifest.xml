@@ -34,6 +34,8 @@
         <service
             android:name=".service.TestService" />
 
+        <receiver android:name=".receiver.NetworkChangeReceiver"/>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/log_img" />

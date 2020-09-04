@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.stenleone.hawkai.view.activity.base.BaseActivity
 
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.*
 
 abstract class BaseFragment(private val layId: Int) : Fragment() {
 
@@ -51,5 +52,6 @@ abstract class BaseFragment(private val layId: Int) : Fragment() {
         }
         view?.let { (activity as BaseActivity).hideKeyboard(it) }
         super.onDestroyView()
+        clearFindViewByIdCache()
     }
 }

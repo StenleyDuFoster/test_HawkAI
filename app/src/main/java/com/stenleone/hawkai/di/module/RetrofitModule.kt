@@ -1,14 +1,18 @@
 package com.stenleone.hawkai.di.module
 
+import android.content.Context
 import com.stenleone.hawkai.model.network.JsonPlaceHolderHawkAI
+import com.stenleone.hawkai.model.network.interceptor.CashInterceptor
 import com.stenleone.hawkai.model.network.interceptor.HeaderTokenInterceptor
 import com.stenleone.hawkai.util.constant.ApiConstant
 
 import io.reactivex.schedulers.Schedulers
+import okhttp3.Cache
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 
 import org.koin.dsl.module
 
@@ -18,24 +22,31 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val retrofitModule = module {
     single { getListInterceptor() }
-    single { getOkkHttp(get()) }
+    single { getOkkHttp(get(), androidContext()) }
     single { getRetrofit(get()) }
     single { getPlaceHolderHawkAI(get()) }
 }
 
 fun getListInterceptor(): List<Interceptor> {
 
-    var interceptor = HeaderTokenInterceptor()
+    var tokenInterceptor = HeaderTokenInterceptor()
     var debugInterceptor = HttpLoggingInterceptor()
+    var cashInterceptor = CashInterceptor()
+
     debugInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
     return listOf(
-        interceptor, debugInterceptor
+        tokenInterceptor,
+        debugInterceptor,
+        cashInterceptor
     )
 }
 
-fun getOkkHttp(listInterceptor: List<Interceptor>): OkHttpClient {
+fun getOkkHttp(listInterceptor: List<Interceptor>, context: Context): OkHttpClient {
     val client = OkHttpClient.Builder()
+    val cacheSize = (5 * 1024 * 1024).toLong()
+    val myCache = Cache(context.cacheDir, cacheSize)
+    client.cache(myCache)
 
     for (interceptor in listInterceptor) {
         client.addInterceptor(interceptor)
